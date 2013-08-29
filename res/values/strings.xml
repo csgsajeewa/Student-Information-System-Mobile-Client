@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Student Infromation System</string>
+    <string name="action_settings">Settings</string>
+     <string name="heading">Enter Your Details </string>
+    <string name="first_name">First Name: </string>
+    <string name="last_name">Last Name: </string>
+    <string name="department">Department: </string>
+    <string name="faculty">Faculty: </string>
+    <string name="year_of_study">Year Of Study: </string>
+    <string name="semester">Semester: </string>
+    <string name="email_address">E Mail: </string>
+    <string name="user_name">User Name: </string>
+    <string name="password">Passsword: </string>
+    <string name="server_message">Message: </string>
+       <string name="username_hint">User Name </string>
+        <string name="password_hint">Password </string>
+    <string name="submit">Submit </string>
+    <string name="join">        Join         </string>
+    <string name="sign">Sign In </string>
+    
+</resources>
