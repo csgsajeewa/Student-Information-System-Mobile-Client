@@ -13,9 +13,16 @@ public class AccountDetailsWindow extends Activity {
 		setContentView(R.layout.acct_details_window);
 		 
 		Intent intent = getIntent();
-		String message = intent.getStringExtra("com.example.webclient.SERVER_MESSAGE");
-		TextView textView=(TextView)findViewById(R.id.serverMessage);
-		textView.setText(message);
+		String index = intent.getStringExtra("com.example.webclient.index");
+		String first_name= intent.getStringExtra("com.example.webclient.first_name");
+		String last_name = intent.getStringExtra("com.example.webclient.last_name");
+		TextView textView1=(TextView)findViewById(R.id.subheading1);
+		TextView textView2=(TextView)findViewById(R.id.subheading2);
+		TextView textView3=(TextView)findViewById(R.id.subheading3);
+		textView1.setText(index);
+		textView2.setText(first_name);
+		textView3.setText(last_name);
+		
 		
 	}
 	

@@ -203,7 +203,8 @@
         android:layout_alignLeft="@+id/editText7"
         android:layout_alignRight="@+id/editText7"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:hint="@string/username_enter_hint" />
 
     <EditText
         android:id="@+id/editText9"

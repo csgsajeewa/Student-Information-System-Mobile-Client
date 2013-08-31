@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -55,7 +57,7 @@ public class MainActivity extends Activity implements AsyncResponse{
 		 String faculty=((EditText)findViewById(R.id.editText7)).getText().toString();
 		 String user_name=((EditText)findViewById(R.id.editText8)).getText().toString();
 		 String password=((EditText)findViewById(R.id.editText9)).getText().toString();
-		 String URL="http://192.168.42.35/WebServer/SignUp.php?first_name="+first_name+"&last_name="+last_name+"&email_address="+email+"&department="+department+"&faculty="+faculty+"&year_of_study="+year_of_study+"&semester="+semester+"&user_name="+user_name+"&password="+password+"&register=Register";
+		 String URL="http://192.168.42.35:8080/WebServer/SignUp.php?first_name="+first_name+"&last_name="+last_name+"&email_address="+email+"&department="+department+"&faculty="+faculty+"&year_of_study="+year_of_study+"&semester="+semester+"&user_name="+user_name+"&password="+password+"&register=Register";
 		 asyncTask.execute(URL);
 	}
 	
@@ -66,10 +68,25 @@ public class MainActivity extends Activity implements AsyncResponse{
 
 		
 		public AsyncResponse delegate=null;
+		User user;
 		@Override
 		protected String doInBackground(String... params) {
 			
-	               return connectToServer(params[0]);
+			XMLParser xmlParser=new XMLParser();
+			
+			
+	              String result= connectToServer(params[0]);
+	              try {
+	            	 
+	  				URL url=new URL(result);
+	  				xmlParser.processFeed(url);
+	  			} catch (MalformedURLException e) {
+	  				
+	  				e.printStackTrace();
+	  			}
+	              user=xmlParser.getUserInfo();
+	  			return xmlParser.getUserInfo().first_name;
+	              
 	              
 		}
 
@@ -77,7 +94,7 @@ public class MainActivity extends Activity implements AsyncResponse{
 		@Override
         protected void onPostExecute(String result) {
 			
-			 delegate.processFinish(result);
+			 delegate.processFinish(user);
        }
 		
 		
@@ -86,6 +103,7 @@ public class MainActivity extends Activity implements AsyncResponse{
 		
 	}
 	
+
 	
 	
 	private String connectToServer(String URL){
@@ -129,6 +147,20 @@ public class MainActivity extends Activity implements AsyncResponse{
 		
 	}
 	
+	private String convertEmail(String email){
+		
+		int ascii_value;
+		for(int i=0;i<email.length();i++){
+			ascii_value=email.charAt(i);
+			if(ascii_value==64){
+				
+				
+			}
+		}
+		
+		return email;
+		
+	}
 	private String convertStreamToString(InputStream is) {
 	    String line = "";
 	    StringBuilder total = new StringBuilder();
@@ -151,12 +183,22 @@ public class MainActivity extends Activity implements AsyncResponse{
 	}
 
 	@Override
-	public void processFinish(String output) {
+	public void processFinish(User user) {
 		Intent intent=new Intent(this,AccountDetailsWindow.class);
-		intent.putExtra("com.example.webclient.SERVER_MESSAGE", output);
+		
+		
+		
+		intent.putExtra("com.example.webclient.index", user.index_number);
+		intent.putExtra("com.example.webclient.first_name", user.first_name);
+		intent.putExtra("com.example.webclient.last_name", user.last_name);
 		startActivity(intent);
 		
 	}
+
+	
+	
+	
+	
 
 }
 

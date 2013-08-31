@@ -16,6 +16,7 @@
     <string name="server_message">Message: </string>
        <string name="username_hint">User Name </string>
         <string name="password_hint">Password </string>
+        <string name="username_enter_hint">Your Registraion Number Ex- 100470N </string>  
     <string name="submit">Submit </string>
     <string name="join">        Join         </string>
     <string name="sign">Sign In </string>

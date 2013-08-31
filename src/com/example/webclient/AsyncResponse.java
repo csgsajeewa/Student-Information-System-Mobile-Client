@@ -1,5 +1,8 @@
 package com.example.webclient;
 
+import java.io.InputStream;
+
 public interface AsyncResponse {
-    void processFinish(String output);
+    void processFinish(User user);
+   // InputStream givestream();
 }
