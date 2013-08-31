@@ -65,7 +65,9 @@ public class MainActivity extends Activity implements AsyncResponse{
 	
 	
 	private class DownloadFilesTask extends AsyncTask<String,Void,String>{
-
+   /* String-Params, the type of the parameters sent to the task upon execution.
+void- the type of the progress units published during the background computation.
+String, the type of the result of the background computation. */
 		
 		public AsyncResponse delegate=null;
 		User user;

@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:text="@string/sign" />
+        android:text="@string/sign" 
+        android:onClick="sign"/>
 
     <EditText
         android:id="@+id/userName"
