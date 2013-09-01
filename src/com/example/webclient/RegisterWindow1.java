@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-//only of EFAC students
+//only of EFAC students not for others
 public class RegisterWindow1 extends Activity implements AsyncResponse{
    
 	RegisterTask registerTask=new RegisterTask();
