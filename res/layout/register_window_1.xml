@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/heading4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Select Your Department"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RadioGroup
+        android:id="@+id/deptRadioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/heading4"
+        android:layout_marginTop="59dp" >
+
+        <RadioButton
+            android:id="@+id/deptRadio0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="ENTC" 
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/deptRadio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSE" />
+
+        <RadioButton
+            android:id="@+id/deptRadio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EE" />
+
+        <RadioButton
+            android:id="@+id/deptRadio3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           
+            android:text="CE" />
+
+        <RadioButton
+            android:id="@+id/deptRadio4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ME" />
+
+        <RadioButton
+            android:id="@+id/deptRadio5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CH" />
+
+        <RadioButton
+            android:id="@+id/deptRadio5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MT" />
+    </RadioGroup>
+
+</RelativeLayout>

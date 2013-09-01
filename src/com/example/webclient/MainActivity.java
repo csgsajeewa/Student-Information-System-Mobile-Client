@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements AsyncResponse{
 		 String faculty=((EditText)findViewById(R.id.editText7)).getText().toString();
 		 String user_name=((EditText)findViewById(R.id.editText8)).getText().toString();
 		 String password=((EditText)findViewById(R.id.editText9)).getText().toString();
-		 String URL="http://192.168.42.35:8080/WebServer/SignUp.php?first_name="+first_name+"&last_name="+last_name+"&email_address="+email+"&department="+department+"&faculty="+faculty+"&year_of_study="+year_of_study+"&semester="+semester+"&user_name="+user_name+"&password="+password+"&register=Register";
+		 String URL="http://192.168.42.35/WebServer/SignUp.php?first_name="+first_name+"&last_name="+last_name+"&email_address="+email+"&department="+department+"&faculty="+faculty+"&year_of_study="+year_of_study+"&semester="+semester+"&user_name="+user_name+"&password="+password+"&register=Register";
 		 asyncTask.execute(URL);
 	}
 	

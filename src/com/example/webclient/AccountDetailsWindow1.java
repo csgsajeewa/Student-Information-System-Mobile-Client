@@ -1,20 +1,26 @@
 package com.example.webclient;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 public class AccountDetailsWindow1 extends Activity {
-
+   
 	
+	String index; //use as session variable
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.acct_details_window1);
+		
 		Intent intent = getIntent();
-		String index = intent.getStringExtra("com.example.webclient.index");
+		 index = intent.getStringExtra("com.example.webclient.index");
 		String first_name= intent.getStringExtra("com.example.webclient.first_name");
 		String last_name = intent.getStringExtra("com.example.webclient.last_name");
 		TextView textView1=(TextView)findViewById(R.id.subheading4);
@@ -34,4 +40,14 @@ public class AccountDetailsWindow1 extends Activity {
 		
 	
 	}
-}
+	
+   public void register(View view){
+		
+	   Intent intent=new Intent(this,RegisterWindow.class);
+		intent.putExtra("com.example.webclient.session_variable", index);
+		startActivity(intent);
+		
+	}
+  
+   
+ }

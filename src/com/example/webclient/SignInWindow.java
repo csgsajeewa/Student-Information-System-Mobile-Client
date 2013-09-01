@@ -23,7 +23,7 @@ public class SignInWindow extends Activity implements AsyncResponse {
 		
 		 String user_name=((EditText)findViewById(R.id.userName)).getText().toString();
 		 String password=((EditText)findViewById(R.id.password)).getText().toString();
-		 String URL="http://192.168.42.35:8080/WebServer/SignIn.php?user_name="+user_name+"&password="+password+"&register=Register";
+		 String URL="http://192.168.42.35/WebServer/SignIn.php?user_name="+user_name+"&password="+password+"&register=Register";
 		 downloadUserInfoTask.execute(URL);
 		 
 		
