@@ -1,22 +1,24 @@
 package com.example.webclient;
 
 
-	
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.net.URL;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-	
-	import org.xml.sax.Attributes;
+import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import android.util.Log;
 
+
+/*server transfer data(account details etc) to mobile app as a xml document 
+ * this class will accept that and parse that and extract the details
+ * 
+ */
 	public class XMLParser extends DefaultHandler{
 		
 		private boolean inItem = false;
