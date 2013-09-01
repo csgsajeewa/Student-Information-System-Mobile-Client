@@ -57,6 +57,22 @@
                
             </intent-filter>
         </activity>
+        
+          <activity
+            android:name="com.example.webclient.RegisterWindow"
+            android:label="@string/app_name" >
+            <intent-filter>
+               
+            </intent-filter>
+        </activity>
+        
+           <activity
+            android:name="com.example.webclient.RegisterWindow1"
+            android:label="@string/app_name" >
+            <intent-filter>
+               
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

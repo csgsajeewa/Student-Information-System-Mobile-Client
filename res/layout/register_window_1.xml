@@ -26,44 +26,50 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="ENTC" 
-            android:checked="true"/>
+            android:onClick="register"/>
 
         <RadioButton
             android:id="@+id/deptRadio1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CSE" />
+            android:text="CSE" 
+             android:onClick="register"/>
 
         <RadioButton
             android:id="@+id/deptRadio2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EE" />
+            android:text="EE" 
+             android:onClick="register"/>
 
         <RadioButton
             android:id="@+id/deptRadio3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            
-            android:text="CE" />
+            android:text="CE" 
+             android:onClick="register"/>
 
         <RadioButton
             android:id="@+id/deptRadio4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ME" />
+            android:text="ME" 
+             android:onClick="register"/>
 
         <RadioButton
             android:id="@+id/deptRadio5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CH" />
+            android:text="CH" 
+             android:onClick="register"/>
 
         <RadioButton
             android:id="@+id/deptRadio5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MT" />
+            android:text="MT" 
+             android:onClick="register"/>
     </RadioGroup>
 
 </RelativeLayout>

@@ -21,7 +21,7 @@
         android:layout_marginTop="54dp" >
 
         <RadioButton
-            android:id="@+id/deptRadio0"
+            android:id="@+id/facRadio1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -29,18 +29,19 @@
             android:onClick="selectDept"/>
 
         <RadioButton
-            android:id="@+id/deptRadio2"
+            android:id="@+id/facRadio2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Faculty Of Information Technology" 
             android:onClick="register"/>
 
         <RadioButton
-            android:id="@+id/deptRadio1"
+            android:id="@+id/facRadio3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Faculty Of Architecture" 
              android:onClick="register"/>
     </RadioGroup>
 
+   
 </RelativeLayout>

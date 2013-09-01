@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.RadioButton;
 
 public class RegisterWindow extends Activity implements AsyncResponse{
    
@@ -17,7 +19,7 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.acct_details_window1);
+		setContentView(R.layout.register_window);
 		registerTask.delegate=this;
 		Intent intent = getIntent();
 		 index = intent.getStringExtra("com.example.webclient.session_variable");
@@ -37,11 +39,22 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 	}
 	
    public void register(View view){
+	   boolean checked = ((RadioButton) view).isChecked();
 		
-	   if(view.getId()==R.id.){
-		   
+	   String fac_code="";
+	   String dept_code="";
+	   if(view.getId()==R.id.facRadio2 && checked){
+		   fac_code="2"; //code for IT
+			dept_code="0";//no dept	   
+		  
 	   }
-	   String URL="http://192.168.42.35/WebServer/SignIn.php?user_name="+index;
+	 
+	   if(view.getId()==R.id.facRadio3 && checked){
+		   fac_code="3"; //code for IT
+			dept_code="0";//no dept	   
+		  
+	   }
+	   String URL="http://192.168.42.35/WebServer/Register.PHP?index="+index+"&fac_code="+fac_code+"&dept_code="+dept_code;
 		 registerTask.execute(URL);
 		
 	
@@ -55,9 +68,11 @@ public class RegisterWindow extends Activity implements AsyncResponse{
    @Override
   	public void processFinish(String message ) {
   		
-  		
-  		
-  		
+	   Toast.makeText(this, "Registration Suceessful", Toast.LENGTH_LONG).show();
+	   Intent intent=new Intent(this,AccountDetailsWindow1.class);
+	   
+  		//go to account details 1 window
+	   startActivity(intent);
   		
   	}
    
@@ -65,24 +80,24 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 	   
 		ServerConnection serverConnection=new ServerConnection();
 		public AsyncResponse delegate=null;
-		User user;
+		//User user;
 		@Override
 		protected String doInBackground(String... params) {
 			
-			XMLParser xmlParser=new XMLParser();
+		//	XMLParser xmlParser=new XMLParser();
 			
 			
 	              String result= serverConnection.connectToServer(params[0]);
 	              try {
 	            	 
 	  				URL url=new URL(result);
-	  				xmlParser.processFeed(url);
+	  			//	xmlParser.processFeed(url);
 	  			} catch (MalformedURLException e) {
 	  				
 	  				e.printStackTrace();
 	  			}
-	              user=xmlParser.getUserInfo();
-	  			return xmlParser.getUserInfo().first_name;
+	            //  user=xmlParser.getUserInfo();
+	  			return result;
 	              
 	              
 		}
@@ -91,7 +106,7 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		@Override
        protected void onPostExecute(String result) {
 			
-			 delegate.processFinish(user);
+			 delegate.processFinish(result);
       }
 		
 	}

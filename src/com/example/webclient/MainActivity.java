@@ -196,6 +196,12 @@ String, the type of the result of the background computation. */
 		startActivity(intent);
 		
 	}
+   //not used
+	@Override
+	public void processFinish(String message) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 	

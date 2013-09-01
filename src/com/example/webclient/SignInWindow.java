@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 //this window will be used for sign in purposes, functionalities yet to be implemented
+
 public class SignInWindow extends Activity implements AsyncResponse {
 	DownloadUserInfoTask downloadUserInfoTask=new DownloadUserInfoTask();
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,5 +82,12 @@ public class SignInWindow extends Activity implements AsyncResponse {
 				
 				
 			}
+
+   //not used
+	@Override
+	public void processFinish(String message) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
