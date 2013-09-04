@@ -36,10 +36,13 @@ public class SignInWindow extends Activity implements AsyncResponse {
 		Intent intent=new Intent(this,AccountDetailsWindow1.class);
 		
 		
-		
+		intent.putExtra("com.example.webclient.isRegistered","false");
 		intent.putExtra("com.example.webclient.index", user.index_number);
 		intent.putExtra("com.example.webclient.first_name", user.first_name);
 		intent.putExtra("com.example.webclient.last_name", user.last_name);
+		//add other details
+		intent.putExtra("com.example.webclient.isRegistered", user.isRegistered);
+		
 		startActivity(intent);
 	}
 	

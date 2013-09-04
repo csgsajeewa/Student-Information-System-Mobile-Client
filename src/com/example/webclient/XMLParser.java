@@ -26,11 +26,25 @@ import android.util.Log;
 		private boolean inIndex = false;
 		private boolean inFirstName = false;
 		private boolean inLastName = false;
+		private boolean inDepartment=false;
+		private boolean inFaculty=false;
+		private boolean inYear=false;
+		private boolean inSemester=false;
+		private boolean inEmail=false;
+		private boolean inRegistered=false;
 		
 		private String title=null;
 		private String index =null;
 		private String firstName = null;
 		private String lastName = null;
+		private String department=null;
+		private String faculty =null;
+		private String year = null;
+		private String semester = null;
+		private String email=null;
+		private String registered =null;
+		
+		
 		private User user=new User();
 		
 		
@@ -59,6 +73,19 @@ import android.util.Log;
 					
 			if (qName.equals("last_name")) 
 						inLastName = true;
+			if (qName.equals("department")) 
+				inDepartment = true;
+			if (qName.equals("faculty")) 
+				inFaculty = true;
+			
+			if (qName.equals("year")) 
+				inYear = true;
+			if (qName.equals("semester")) 
+				inSemester = true;
+			if (qName.equals("email")) 
+				inEmail = true;
+			if (qName.equals("isRegistered")) 
+				inRegistered = true;
 					
 		}
 			
@@ -98,6 +125,46 @@ import android.util.Log;
 				 user.setLast_name(lastName);
 			 }
 			 
+			 if (inDepartment && inItem){
+				 
+				 inDepartment=false;
+				department=new String(ch,start,length);
+				 user.setDepartment(department);
+			 }
+			 
+			 if (inFaculty && inItem){
+				 
+				 inFaculty=false;
+				faculty=new String(ch,start,length);
+				 user.setFaculty(faculty);
+			 }
+			 
+			 if (inYear && inItem){
+				 
+				 inYear=false;
+				year=new String(ch,start,length);
+				 user.setYear(year);
+			 }
+			 
+			 if (inSemester && inItem){
+				 
+				 inSemester=false;
+				year=new String(ch,start,length);
+				 user.setYear(year);
+			 }
+			 
+			 if (inEmail && inItem){
+				 
+				 inEmail=false;
+				email=new String(ch,start,length);
+				 user.setEmail(email);
+			 }
+			 if (inRegistered && inItem){
+				 
+				 inRegistered=false;
+				registered=new String(ch,start,length);
+				 user.setIsRegistered(registered);
+			 }
 		 }
 		 
 		 

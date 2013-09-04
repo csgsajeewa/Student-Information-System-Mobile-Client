@@ -5,6 +5,12 @@ public class User {
 	String index_number;
 	String first_name;
 	String last_name;
+	String department;
+	String faculty;
+	String year;
+	String semester;
+	String email;
+	String isRegistered;
 
 	
 	public void setFirst_name(String first_name) {
@@ -19,6 +25,30 @@ public class User {
 	this.index_number = index_number;
 	}
 	
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	
+	public void setFaculty(String faculty) {
+		this.faculty = faculty;
+	}
+	
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+	
+	public void setYear(String year) {
+		this.year = year;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+	public void setIsRegistered(String isRegistered) {
+		this.isRegistered = isRegistered;
+	}
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -29,6 +59,30 @@ public class User {
 	
 	public String getIndex_number() {
 		return index_number;
+	}
+	
+	public String getDepartment() {
+		return department;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getFaculty() {
+		return faculty;
+	}
+	
+	public String getSemester() {
+		return semester;
+	}
+	
+	public String getYear() {
+		return year;
+	}
+	
+	public String getIsRegistered() {
+		return isRegistered;
 	}
 
 }

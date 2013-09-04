@@ -70,7 +70,7 @@ public class RegisterWindow extends Activity implements AsyncResponse{
   		
 	   Toast.makeText(this, "Registration Suceessful", Toast.LENGTH_LONG).show();
 	   Intent intent=new Intent(this,AccountDetailsWindow1.class);
-	   
+	   intent.putExtra("com.example.webclient.isRegistered","true");
   		//go to account details 1 window
 	   startActivity(intent);
   		

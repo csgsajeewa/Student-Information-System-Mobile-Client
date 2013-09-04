@@ -63,4 +63,15 @@
         android:onClick="signOut"
         android:text="@string/signOut" />
 
+    <Button
+        android:id="@+id/checkNews"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Register"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:text="Check News" 
+        android:onClick="checkNews"/>
+
 </RelativeLayout>
