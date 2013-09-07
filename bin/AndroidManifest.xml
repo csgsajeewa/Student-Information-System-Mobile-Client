@@ -83,6 +83,14 @@
             </intent-filter>
         </activity>
         
+         <activity
+            android:name="com.example.webclient.NewsD"
+            android:label="@string/app_name" >
+            <intent-filter>
+               
+            </intent-filter>
+        </activity>
+        
         
            <receiver android:name="com.example.webclient.NewsReceiver">
              <intent-filter >
