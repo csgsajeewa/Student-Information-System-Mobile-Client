@@ -5,9 +5,16 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="10"
         android:targetSdkVersion="17" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <permission android:name="com.example.webclient.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.example.webclient.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -84,7 +91,15 @@
         </activity>
         
          <activity
-            android:name="com.example.webclient.NewsD"
+            android:name="com.example.webclient.NewsDialog"
+            android:label="@string/app_name" >
+            <intent-filter>
+               
+            </intent-filter>
+        </activity>
+        
+          <activity
+            android:name="com.example.webclient.GCMRegister"
             android:label="@string/app_name" >
             <intent-filter>
                
@@ -92,11 +107,14 @@
         </activity>
         
         
-           <receiver android:name="com.example.webclient.NewsReceiver">
-             <intent-filter >
-                
-                   <action android:name="com.example.broadcaster.newsReceived" />
-             </intent-filter>
+        
+           <receiver android:name="com.example.webclient.NewsReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+             
          </receiver>
     </application>
 

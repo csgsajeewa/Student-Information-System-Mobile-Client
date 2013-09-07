@@ -82,7 +82,7 @@ public class RegisterWindow1 extends Activity implements AsyncResponse{
   	public void processFinish(String message ) {
   		
 	   Toast.makeText(this, "Registration Suceessful EFAC", Toast.LENGTH_LONG).show();
-	   Intent intent=new Intent(this,AccountDetailsWindow1.class);
+	   Intent intent=new Intent(this,GCMRegister.class);
 	   intent.putExtra("com.example.webclient.isRegistered","Yes");
   		startActivity(intent);
   		
