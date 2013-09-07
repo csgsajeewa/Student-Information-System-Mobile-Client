@@ -22,22 +22,23 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int logo=0x7f020001;
     }
     public static final class id {
         public static final int BackToSign=0x7f090000;
         public static final int Register=0x7f090009;
-        public static final int action_settings=0x7f090033;
+        public static final int action_settings=0x7f090034;
         public static final int button1=0x7f09000d;
         public static final int button2=0x7f090022;
         public static final int button3=0x7f090021;
         public static final int checkNews=0x7f09000b;
-        public static final int deptRadio0=0x7f09002a;
-        public static final int deptRadio1=0x7f09002b;
-        public static final int deptRadio2=0x7f09002c;
-        public static final int deptRadio3=0x7f09002d;
-        public static final int deptRadio4=0x7f09002e;
-        public static final int deptRadio5=0x7f09002f;
-        public static final int deptRadioGroup1=0x7f090029;
+        public static final int deptRadio0=0x7f09002b;
+        public static final int deptRadio1=0x7f09002c;
+        public static final int deptRadio2=0x7f09002d;
+        public static final int deptRadio3=0x7f09002e;
+        public static final int deptRadio4=0x7f09002f;
+        public static final int deptRadio5=0x7f090030;
+        public static final int deptRadioGroup1=0x7f09002a;
         public static final int editText1=0x7f090017;
         public static final int editText2=0x7f090018;
         public static final int editText3=0x7f090019;
@@ -47,17 +48,18 @@ public final class R {
         public static final int editText7=0x7f09001d;
         public static final int editText8=0x7f09001e;
         public static final int editText9=0x7f09001f;
-        public static final int facRadio1=0x7f090025;
-        public static final int facRadio2=0x7f090026;
-        public static final int facRadio3=0x7f090027;
-        public static final int facRadioGroup1=0x7f090024;
+        public static final int facRadio1=0x7f090026;
+        public static final int facRadio2=0x7f090027;
+        public static final int facRadio3=0x7f090028;
+        public static final int facRadioGroup1=0x7f090025;
         public static final int heading1=0x7f090002;
         public static final int heading2=0x7f090006;
-        public static final int heading3=0x7f090023;
-        public static final int heading4=0x7f090028;
+        public static final int heading3=0x7f090024;
+        public static final int heading4=0x7f090029;
         public static final int message=0x7f090020;
-        public static final int password=0x7f090032;
-        public static final int signIn1=0x7f090030;
+        public static final int newsTest=0x7f090023;
+        public static final int password=0x7f090033;
+        public static final int signIn1=0x7f090031;
         public static final int signOut=0x7f09000a;
         public static final int subheading1=0x7f090001;
         public static final int subheading2=0x7f090004;
@@ -75,7 +77,7 @@ public final class R {
         public static final int textView7=0x7f090013;
         public static final int textView8=0x7f090012;
         public static final int textView9=0x7f090015;
-        public static final int userName=0x7f090031;
+        public static final int userName=0x7f090032;
     }
     public static final class layout {
         public static final int acct_details_window=0x7f030000;
@@ -83,9 +85,10 @@ public final class R {
         public static final int activity_main=0x7f030002;
         public static final int main=0x7f030003;
         public static final int main_window=0x7f030004;
-        public static final int register_window=0x7f030005;
-        public static final int register_window_1=0x7f030006;
-        public static final int signin_window=0x7f030007;
+        public static final int news_window=0x7f030005;
+        public static final int register_window=0x7f030006;
+        public static final int register_window_1=0x7f030007;
+        public static final int signin_window=0x7f030008;
     }
     public static final class menu {
         public static final int main=0x7f080000;
