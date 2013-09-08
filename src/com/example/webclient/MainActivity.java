@@ -1,21 +1,14 @@
 package com.example.webclient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.view.Menu;
@@ -25,28 +18,58 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.Toast;
+//this activity is used to register users in the site
+//link with activity_main.xml
 
 public class MainActivity extends Activity implements AsyncResponse{
 
 	
 	DownloadFilesTask asyncTask =new DownloadFilesTask();
 	Button button;
+	AlertDialog.Builder ad;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		asyncTask.delegate = this;
+		///////////////////////////dialog configuration/////////////////////
+		Context context = MainActivity.this;
+		String title = "UOM Info System";
+		String message = "User has already registered !!";
+		String button1String = "Go Back";
+		String button2String = "Move Forward";
 		
+		 ad = new AlertDialog.Builder(context);
+		 ad.setTitle(title);
+		 ad.setMessage(message);
 		
-		//=(TextView)findViewById(R.id.textView4);
-	   // Button button = (Button) findViewById(R.id.button1);
-       // button.setOnClickListener(new bbt());
-             
-		 
+		ad.setPositiveButton(button1String,new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int arg1) {
+				// user mistakenly enter existing password ,stay in the same page
+			}
+		}
+	   );
+	
+	
+	
+		ad.setNegativeButton(button2String,new DialogInterface.OnClickListener(){
+			      public void onClick(DialogInterface dialog, int arg1) {
+			    	  gotoMainWindow();
+			       }
+			}
+	   );
+		/////////////////////////////end////////////////////////////////////////////
 		
 	}
 	
+	public void gotoMainWindow(){
+		
+		Intent intent=new Intent(this,MainWindow.class);
+		  startActivity(intent);
+	}
 	public void submit(View view){
+		
+		 Toast toast;
 		
 		 String first_name=((EditText)findViewById(R.id.editText1)).getText().toString();
 		 String last_name=((EditText)findViewById(R.id.editText2)).getText().toString();
@@ -57,125 +80,58 @@ public class MainActivity extends Activity implements AsyncResponse{
 		 String faculty=((EditText)findViewById(R.id.editText7)).getText().toString();
 		 String user_name=((EditText)findViewById(R.id.editText8)).getText().toString();
 		 String password=((EditText)findViewById(R.id.editText9)).getText().toString();
-		 String URL="http://192.168.42.35/WebServer/SignUp.php?first_name="+first_name+"&last_name="+last_name+"&email_address="+email+"&department="+department+"&faculty="+faculty+"&year_of_study="+year_of_study+"&semester="+semester+"&user_name="+user_name+"&password="+password+"&register=Register";
-		 asyncTask.execute(URL);
+		 if(first_name.isEmpty() || last_name.isEmpty() || email.isEmpty() || semester.isEmpty() || year_of_study.isEmpty() ||  faculty.isEmpty() || user_name.isEmpty() || password.isEmpty()){
+			  toast = Toast.makeText(this,"Please Fill All The Fields", Toast.LENGTH_LONG);
+				toast.show();
+		 
+		 }
+		 else if(faculty.equals("EFAC") && department.isEmpty()){
+			 toast = Toast.makeText(this,"Please Fill Department Field", Toast.LENGTH_LONG);
+				toast.show();
+		 }
+		 else{
+			 if(department.isEmpty()){
+				 department="No";
+			 }
+			 String URL="http://192.168.42.35/WebServer/SignUp.php?first_name="+first_name+"&last_name="+last_name+"&email_address="+email+"&department="+department+"&faculty="+faculty+"&year_of_study="+year_of_study+"&semester="+semester+"&user_name="+user_name+"&password="+password+"&register=Register";
+		    if(asyncTask==null){
+			 asyncTask=new DownloadFilesTask();
+			 asyncTask.delegate=this;
+			}
+		 
+		 	asyncTask.execute(URL);
+		 }
 	}
 	
 	
 	
-	
+	/* String-Params, the type of the parameters sent to the task upon execution.
+	void- the type of the progress units published during the background computation.
+	String, the type of the result of the background computation. */
 	private class DownloadFilesTask extends AsyncTask<String,Void,String>{
-   /* String-Params, the type of the parameters sent to the task upon execution.
-void- the type of the progress units published during the background computation.
-String, the type of the result of the background computation. */
-		
+   
+		ServerConnection serverConnection=new ServerConnection();
 		public AsyncResponse delegate=null;
-		User user;
+		
 		@Override
 		protected String doInBackground(String... params) {
 			
-			XMLParser xmlParser=new XMLParser();
-			
-			
-	              String result= connectToServer(params[0]);
-	              try {
-	            	 
-	  				URL url=new URL(result);
-	  				xmlParser.processFeed(url);
-	  			} catch (MalformedURLException e) {
-	  				
-	  				e.printStackTrace();
-	  			}
-	              user=xmlParser.getUserInfo();
-	  			return xmlParser.getUserInfo().first_name;
+				String result= serverConnection.connectToServer(params[0]);
+				asyncTask=null;
+	            return result;
 	              
-	              
-		}
+	     }
 
 		
 		@Override
         protected void onPostExecute(String result) {
 			
-			 delegate.processFinish(user);
+				delegate.processFinish(result);
+			
        }
 		
-		
-
-		
-		
-	}
+}
 	
-
-	
-	
-	private String connectToServer(String URL){
-		
-		
-		    	
-		     String line = "";
-		    	
-		    	try {
-		    		 HttpClient httpclient = new DefaultHttpClient();
-		    		 //http://localhost/WebServer/SignUp.php?first_name=chamath&last_name=sajeewa&email_address=csgsajeewa%40gmail.com&department=CSE&faculty=engineering&year_of_study=2013&semester=3&user_name=chamath&password=chamath&register=Register
-		    		//http://chamath.byethost15.com/WebServer/index.php?first_name=chamath&last_name=sajeewa
-		    		 HttpGet httpget = new HttpGet(URL);
-				     HttpResponse response = httpclient.execute(httpget);
-				     
-				    if(response != null) {
-				       
-				        InputStream inputstream = response.getEntity().getContent();
-				        line = convertStreamToString(inputstream);
-				       // Toast.makeText(this, line, Toast.LENGTH_SHORT).show();
-				    } 
-				    else {
-				       // Toast.makeText(this, "Unable to complete your request", Toast.LENGTH_LONG).show();
-				    	line="Unable to complete your request";
-				    }
-				} catch (ClientProtocolException e) {
-					line="pro";
-				    //Toast.makeText(this, "Caught ClientProtocolException", Toast.LENGTH_LONG).show();
-				} catch (IOException e) {
-					line= "IO";
-				   // Toast.makeText(this, "Caught IOException", Toast.LENGTH_LONG).show();
-				} catch (Exception e) {
-					line="Exception";
-				  //  Toast.makeText(this, "Caught Exception", Toast.LENGTH_LONG).show();
-				}
-		    	//textView.setText(line);
-		    	
-		    	return line;
-				
-		
-		
-	}
-	
-	private String convertEmail(String email){
-		
-		int ascii_value;
-		for(int i=0;i<email.length();i++){
-			ascii_value=email.charAt(i);
-			if(ascii_value==64){
-				
-				
-			}
-		}
-		
-		return email;
-		
-	}
-	private String convertStreamToString(InputStream is) {
-	    String line = "";
-	    StringBuilder total = new StringBuilder();
-	    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-	    try {
-	        while ((line = rd.readLine()) != null) {
-	            total.append(line);
-	        }
-	    } catch (Exception e) {
-	        Toast.makeText(this, "Stream Exception", Toast.LENGTH_SHORT).show();
-	    }
-	    return total.toString();
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -186,20 +142,25 @@ String, the type of the result of the background computation. */
 
 	@Override
 	public void processFinish(User user) {
-		Intent intent=new Intent(this,AccountDetailsWindow.class);
 		
-		
-		
-		intent.putExtra("com.example.webclient.index", user.index_number);
-		intent.putExtra("com.example.webclient.first_name", user.first_name);
-		intent.putExtra("com.example.webclient.last_name", user.last_name);
-		startActivity(intent);
+		//not used
 		
 	}
-   //not used
+  
 	@Override
 	public void processFinish(String message) {
-		// TODO Auto-generated method stub
+		if(message.equals("        200")){
+		ad.show();
+		}
+		else
+		{
+			Intent intent=new Intent(this,MainWindow.class);
+		    Toast toast = Toast.makeText(this,"Registration Is Successful", Toast.LENGTH_LONG);
+			toast.show();
+			startActivity(intent);
+			
+		}
+		
 		
 	}
 

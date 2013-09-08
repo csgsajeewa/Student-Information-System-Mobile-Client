@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 //this window will be used for sign in purposes, functionalities yet to be implemented
+import android.widget.Toast;
 
 public class SignInWindow extends Activity implements AsyncResponse {
-	DownloadUserInfoTask downloadUserInfoTask=new DownloadUserInfoTask();
+	DownloadUserInfoTask downloadUserInfoTask;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.signin_window);
+		if(downloadUserInfoTask==null){
+		 downloadUserInfoTask=new DownloadUserInfoTask();
+		}
 		downloadUserInfoTask.delegate=this;
 
 	}
@@ -25,9 +29,19 @@ public class SignInWindow extends Activity implements AsyncResponse {
 		 String user_name=((EditText)findViewById(R.id.userName)).getText().toString();
 		 String password=((EditText)findViewById(R.id.password)).getText().toString();
 		 String URL="http://192.168.42.35/WebServer/SignIn.php?user_name="+user_name+"&password="+password+"&register=Register";
+		 if(downloadUserInfoTask==null){
+			 downloadUserInfoTask=new DownloadUserInfoTask();
+			 downloadUserInfoTask.delegate=this;
+			}
 		 downloadUserInfoTask.execute(URL);
 		 
 		
+	}
+	
+	public void goBack(View view){
+		
+		Intent intent=new Intent(this,MainWindow.class);
+		startActivity(intent);
 	}
 
 	@Override
@@ -36,7 +50,7 @@ public class SignInWindow extends Activity implements AsyncResponse {
 		Intent intent=new Intent(this,AccountDetailsWindow1.class);
 		
 		
-		intent.putExtra("com.example.webclient.isRegistered","false");
+		intent.putExtra("com.example.webclient.isRegistered",user.isRegistered);
 		intent.putExtra("com.example.webclient.index", user.index_number);
 		intent.putExtra("com.example.webclient.first_name", user.first_name);
 		intent.putExtra("com.example.webclient.last_name", user.last_name);
@@ -59,25 +73,36 @@ public class SignInWindow extends Activity implements AsyncResponse {
 					
 					
 			              String result= serverConnection.connectToServer(params[0]);
+			              if(!(result.equals("210"))){
 			              try {
 			            	 
-			  				URL url=new URL(result);
-			  				xmlParser.processFeed(url);
-			  			} catch (MalformedURLException e) {
+			  					URL url=new URL(result);
+			  					xmlParser.processFeed(url);
+			  				} catch (MalformedURLException e) {
 			  				
-			  				e.printStackTrace();
-			  			}
-			              user=xmlParser.getUserInfo();
-			  			return xmlParser.getUserInfo().first_name;
+			  					e.printStackTrace();
+			  				}
+			              		user=xmlParser.getUserInfo();
+			              		return xmlParser.getUserInfo().first_name;
+			              }
+			              else{
+			            	  downloadUserInfoTask=null;
+			            	  return result;
+			              }
 			              
-			              
+			             
 				}
 
 				
 				@Override
 		        protected void onPostExecute(String result) {
 					
-					 delegate.processFinish(user);
+					if(result.equals("210")){
+						delegate.processFinish(result);
+					}
+					else{
+						delegate.processFinish(user);
+					}
 		       }
 				
 				
@@ -89,7 +114,8 @@ public class SignInWindow extends Activity implements AsyncResponse {
    //not used
 	@Override
 	public void processFinish(String message) {
-		// TODO Auto-generated method stub
+		 Toast toast = Toast.makeText(this,"Invalide user name or password", Toast.LENGTH_LONG);
+			toast.show();
 		
 	}
 

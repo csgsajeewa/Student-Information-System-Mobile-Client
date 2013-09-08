@@ -343,22 +343,25 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f07000e;
         public static final int department=0x7f07001a;
+        public static final int department_hint=0x7f070023;
         public static final int email_address=0x7f07001e;
         public static final int faculty=0x7f07001b;
+        public static final int faculty_hint=0x7f070022;
         public static final int first_name=0x7f070018;
+        public static final int goBack=0x7f07002b;
         public static final int heading=0x7f070017;
-        public static final int join=0x7f070026;
+        public static final int join=0x7f070028;
         public static final int last_name=0x7f070019;
         public static final int password=0x7f070020;
-        public static final int password_hint=0x7f070023;
+        public static final int password_hint=0x7f070025;
         public static final int semester=0x7f07001d;
         public static final int server_message=0x7f070021;
-        public static final int sign=0x7f070027;
-        public static final int signOut=0x7f070028;
-        public static final int submit=0x7f070025;
+        public static final int sign=0x7f070029;
+        public static final int signOut=0x7f07002a;
+        public static final int submit=0x7f070027;
         public static final int user_name=0x7f07001f;
-        public static final int username_enter_hint=0x7f070024;
-        public static final int username_hint=0x7f070022;
+        public static final int username_enter_hint=0x7f070026;
+        public static final int username_hint=0x7f070024;
         public static final int year_of_study=0x7f07001c;
     }
     public static final class style {

@@ -1,6 +1,8 @@
 package com.example.webclient;
 //this window will show the account detail after a successfull registration (first time)
+//
 //user is provided with login button
+//not used to be removed
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

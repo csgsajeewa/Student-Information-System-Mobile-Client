@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-
+//start window of the application no errors
 
 public class MainWindow extends Activity{
 	
@@ -15,10 +15,7 @@ public class MainWindow extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_window);
 		 
-		//Button joinButton=(Button)findViewById(R.id.button2);
-		//Button signInButton=(Button)findViewById(R.id.button3);
-		//joinButton.setOnClickListener(new JoinButtonListener());
-		//signInButton.setOnClickListener(new SignInButtonListener());
+		
 	}
 		
 		public void join(View view){

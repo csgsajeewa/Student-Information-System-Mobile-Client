@@ -10,6 +10,6 @@ public class NewsWindow extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.news_window);
 		TextView textView=(TextView)findViewById(R.id.newsTest);
-		textView.setText("Work Correctly");
+		textView.setText("Work Correctlyyyy");
 	}
 }

@@ -183,7 +183,8 @@
         android:layout_alignRight="@+id/editText3"
         android:layout_alignTop="@+id/textView7"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" 
+        android:hint="@string/department_hint"/>
 
     <EditText
         android:id="@+id/editText7"
@@ -193,7 +194,8 @@
         android:layout_alignRight="@+id/editText6"
         android:layout_alignTop="@+id/textView8"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" 
+        android:hint="@string/faculty_hint"/>
 
     <EditText
         android:id="@+id/editText8"

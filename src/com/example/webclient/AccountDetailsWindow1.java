@@ -15,13 +15,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class AccountDetailsWindow1 extends Activity {
+public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
    
 	
 	String index; //use as session variable
 	String isRegistered;
 	AlertDialog.Builder ad;
+	DeregisterTask deregisterTask=new DeregisterTask();
 	
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class AccountDetailsWindow1 extends Activity {
 		
 		setContentView(R.layout.acct_details_window1);
 		///////////////////////////////////////////////////////////
+		deregisterTask.delegate=this;
 		Context context = AccountDetailsWindow1.this;
 		String title = "UOM Info System";
 		String message = "Do you really want to deregister from the news service !!";
@@ -118,7 +121,9 @@ public class AccountDetailsWindow1 extends Activity {
 		
 	}
    public void deregister(){
-	   index="100479M";
+	   String URL="http://192.168.42.35/WebServer/Deregister.php?index="+index;
+		deregisterTask.execute(URL); 
+		isRegistered="No";
    }
    
    public void checkNews(View view){
@@ -129,6 +134,42 @@ public class AccountDetailsWindow1 extends Activity {
 		
 	
 	}
+   
+   private class DeregisterTask extends AsyncTask<String,Void,String>{
+	   
+		ServerConnection serverConnection=new ServerConnection();
+		public AsyncResponse delegate=null;
+		
+		@Override
+		protected String doInBackground(String... params) {
+			
+			 String result= serverConnection.connectToServer(params[0]);
+			 return result;
+	             
+	     }
+
+		
+		@Override
+       protected void onPostExecute(String result) {
+			
+			 delegate.processFinish(result);
+      }
+		
+	}
+
+@Override
+public void processFinish(User user) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void processFinish(String message) {
+	Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+	toast.show();
+	
+}
+
    
   
    

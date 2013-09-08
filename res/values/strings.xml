@@ -14,12 +14,15 @@
     <string name="user_name">User Name: </string>
     <string name="password">Passsword: </string>
     <string name="server_message">Message: </string>
-       <string name="username_hint">User Name </string>
-        <string name="password_hint">Password </string>
-        <string name="username_enter_hint">Your Registraion Number Ex- 100470N </string>  
+    <string name="faculty_hint">Ex- EFAC, FIT, Archi </string>
+    <string name="department_hint"> Ex- electronic,computer,electrical, civil </string>
+    <string name="username_hint">User Name Ex-100470N </string>
+    <string name="password_hint">Password </string>
+    <string name="username_enter_hint">Your Registraion Number Ex- 100470N </string>  
     <string name="submit">Submit </string>
     <string name="join">        Join         </string>
     <string name="sign">Sign In </string>
-     <string name="signOut">Sign Out </string>
+    <string name="signOut">Sign Out </string>
+    <string name="goBack">Back</string>
     
 </resources>
