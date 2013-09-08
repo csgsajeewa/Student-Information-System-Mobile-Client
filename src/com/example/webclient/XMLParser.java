@@ -149,8 +149,8 @@ import android.util.Log;
 			 if (inSemester && inItem){
 				 
 				 inSemester=false;
-				year=new String(ch,start,length);
-				 user.setYear(year);
+				semester=new String(ch,start,length);
+				 user.setSemester(semester);
 			 }
 			 
 			 if (inEmail && inItem){

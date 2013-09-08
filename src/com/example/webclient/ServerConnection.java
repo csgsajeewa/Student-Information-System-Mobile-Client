@@ -11,7 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-
+//used to connect to the server
 
 public class ServerConnection {
 
@@ -32,7 +32,7 @@ public class ServerConnection {
 			       
 			        InputStream inputstream = response.getEntity().getContent();
 			        line = convertStreamToString(inputstream);
-			       // Toast.makeText(this, line, Toast.LENGTH_SHORT).show();
+			      
 			    } 
 			    else {
 			       // Toast.makeText(this, "Unable to complete your request", Toast.LENGTH_LONG).show();

@@ -1,14 +1,13 @@
 package com.example.webclient;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+
 import android.widget.Toast;
 import android.widget.RadioButton;
 
@@ -16,6 +15,14 @@ public class RegisterWindow extends Activity implements AsyncResponse{
    
 	RegisterTask registerTask=new RegisterTask();
 	String index; //use as session variable
+	String isRegistered;
+	String first_name;
+	String last_name;
+	String department;
+	String faculty;
+	String semester;
+	String year;
+	String email;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -23,6 +30,14 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		registerTask.delegate=this;
 		Intent intent = getIntent();
 		 index = intent.getStringExtra("com.example.webclient.session_variable");
+		 isRegistered=intent.getStringExtra("com.example.webclient.isRegistered");
+		 first_name= intent.getStringExtra("com.example.webclient.first_name");
+		 last_name = intent.getStringExtra("com.example.webclient.last_name");
+		 department=intent.getStringExtra("com.example.webclient.department");
+		 faculty=intent.getStringExtra("com.example.webclient.faculty");
+		 semester=intent.getStringExtra("com.example.webclient.semester");
+	     year=intent.getStringExtra("com.example.webclient.year");
+		 email=intent.getStringExtra("com.example.webclient.email");
 		
 	
 		
@@ -33,6 +48,14 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		
 		Intent intent=new Intent(this,RegisterWindow1.class);
 		intent.putExtra("com.example.webclient.session_variable", index);
+		intent.putExtra("com.example.webclient.isRegistered","No");
+		intent.putExtra("com.example.webclient.first_name", first_name);
+			intent.putExtra("com.example.webclient.last_name", last_name);
+			intent.putExtra("com.example.webclient.department", department);
+			intent.putExtra("com.example.webclient.faculty",faculty);
+			intent.putExtra("com.example.webclient.semester",semester);
+			intent.putExtra("com.example.webclient.year", year);
+			intent.putExtra("com.example.webclient.email", email);
 		startActivity(intent);
 		
 	
@@ -45,13 +68,13 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 	   String dept_code="";
 	   if(view.getId()==R.id.facRadio2 && checked){
 		   fac_code="2"; //code for IT
-			dept_code="0";//no dept	   
+			dept_code="0";//no department	   
 		  
 	   }
 	 
 	   if(view.getId()==R.id.facRadio3 && checked){
-		   fac_code="3"; //code for IT
-			dept_code="0";//no dept	   
+		   fac_code="3"; //code for Architecture
+			dept_code="0";//no department	   
 		  
 	   }
 	   String URL="http://192.168.42.35/WebServer/Register.PHP?index="+index+"&fac_code="+fac_code+"&dept_code="+dept_code;
@@ -70,7 +93,18 @@ public class RegisterWindow extends Activity implements AsyncResponse{
   		
 	   Toast.makeText(this, "Registration Suceessful", Toast.LENGTH_LONG).show();
 	   Intent intent=new Intent(this,AccountDetailsWindow1.class);
+	   
 	   intent.putExtra("com.example.webclient.isRegistered","Yes");
+	   
+		intent.putExtra("com.example.webclient.session_variable", index);
+		intent.putExtra("com.example.webclient.first_name", first_name);
+		intent.putExtra("com.example.webclient.last_name", last_name);
+		intent.putExtra("com.example.webclient.department", department);
+		intent.putExtra("com.example.webclient.faculty",faculty);
+		intent.putExtra("com.example.webclient.semester",semester);
+		intent.putExtra("com.example.webclient.year", year);
+		
+		intent.putExtra("com.example.webclient.email", email);
   		//go to account details 1 window
 	   startActivity(intent);
   		
@@ -80,24 +114,11 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 	   
 		ServerConnection serverConnection=new ServerConnection();
 		public AsyncResponse delegate=null;
-		//User user;
+		
 		@Override
 		protected String doInBackground(String... params) {
-			
-		//	XMLParser xmlParser=new XMLParser();
-			
-			
-	              String result= serverConnection.connectToServer(params[0]);
-	              try {
-	            	 
-	  				URL url=new URL(result);
-	  			//	xmlParser.processFeed(url);
-	  			} catch (MalformedURLException e) {
-	  				
-	  				e.printStackTrace();
-	  			}
-	            //  user=xmlParser.getUserInfo();
-	  			return result;
+			 String result= serverConnection.connectToServer(params[0]);
+	         return result;
 	              
 	              
 		}

@@ -1,8 +1,5 @@
 package com.example.webclient;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 
 
 import android.app.Activity;
@@ -17,26 +14,35 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//display customer details
 public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
    
 	
 	String index; //use as session variable
 	String isRegistered;
+	String first_name;
+	String last_name;
+	String department;
+	String faculty;
+	String semester;
+	String year;
+	String email;
 	AlertDialog.Builder ad;
-	DeregisterTask deregisterTask=new DeregisterTask();
-	
+	UnregisterTask unregisterTask=new UnregisterTask();
+	Button b1 ;
+	Button b2;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.acct_details_window1);
-		///////////////////////////////////////////////////////////
-		deregisterTask.delegate=this;
+		////////////////////////Dialog unregister///////////////////////////////////
+		unregisterTask.delegate=this;
 		Context context = AccountDetailsWindow1.this;
 		String title = "UOM Info System";
 		String message = "Do you really want to deregister from the news service !!";
-		String button1String = "Go Back";
-		String button2String = "Move Forward";
+		String button1String = "Unregister";
+		String button2String = "Go Back";
 		
 		 ad = new AlertDialog.Builder(context);
 		ad.setTitle(title);
@@ -44,7 +50,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		
 		ad.setPositiveButton(button1String,new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int arg1) {
-				deregister();// this function to be implemented 
+				unregister();// this function to be implemented 
 			}
 		}
 	   );
@@ -53,7 +59,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 	
 		ad.setNegativeButton(button2String,new DialogInterface.OnClickListener(){
 			      public void onClick(DialogInterface dialog, int arg1) {
-			                 // do nothing
+			                 // do nothing user has decided not to unregister
 			       }
 			}
 	   );
@@ -70,27 +76,41 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		isRegistered=intent.getStringExtra("com.example.webclient.isRegistered");
 		if(isRegistered.equals("Yes")){
 			
-			Button b = (Button)findViewById(R.id.Register);
-			b.setText("Dergister From News Service");
+			b1= (Button)findViewById(R.id.Register);
+			b1.setText("Unregister From News Service");
 		
 			//b.setVisibility(View.GONE);
 		}
 		
 		if(isRegistered.equals("No")){
 			
-			Button b = (Button)findViewById(R.id.checkNews);
-			b.setVisibility(View.GONE);
+			 b2 = (Button)findViewById(R.id.checkNews);
+			b2.setVisibility(View.GONE);
 		}
 		
 		 index = intent.getStringExtra("com.example.webclient.index");
-		String first_name= intent.getStringExtra("com.example.webclient.first_name");
-		String last_name = intent.getStringExtra("com.example.webclient.last_name");
-		TextView textView1=(TextView)findViewById(R.id.subheading4);
-		TextView textView2=(TextView)findViewById(R.id.subheading5);
-		TextView textView3=(TextView)findViewById(R.id.subheading6);
-		textView1.setText(index);
-		textView2.setText(first_name);
-		textView3.setText(last_name);
+		 first_name= intent.getStringExtra("com.example.webclient.first_name");
+		 last_name = intent.getStringExtra("com.example.webclient.last_name");
+		 department=intent.getStringExtra("com.example.webclient.department");
+		 faculty=intent.getStringExtra("com.example.webclient.faculty");
+		 semester=intent.getStringExtra("com.example.webclient.semester");
+	     year=intent.getStringExtra("com.example.webclient.year");
+		email=intent.getStringExtra("com.example.webclient.email");
+		TextView textView1=(TextView)findViewById(R.id.profileName1);
+		TextView textView2=(TextView)findViewById(R.id.profileIndex1);
+		TextView textView3=(TextView)findViewById(R.id.profileDepartment1);
+		TextView textView4=(TextView)findViewById(R.id.profileFaculty1);
+		TextView textView5=(TextView)findViewById(R.id.profileSemseter1);
+		TextView textView6=(TextView)findViewById(R.id.profileStudyYear1);
+		TextView textView7=(TextView)findViewById(R.id.profileEmail1);
+		String name= first_name+" "+last_name;
+		textView1.setText(name);
+		textView2.setText(index);
+		textView3.setText(department);
+		textView4.setText(faculty);
+		textView5.setText(semester);
+		textView6.setText(year);
+		textView7.setText(email);
 		
 		
 	}
@@ -105,10 +125,10 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 	// if user is not registered for the news service this function will register the user. 
 	//if he has already registered then check news
    public void register(View view){
-	   //deregister function-show dialog
+	   //unregister function-show dialog
 	   if(isRegistered.equals("Yes")){
 		  ad.show();
-		  // if user clicks move forward deregister function is used  
+		  // if user clicks move forward unregister function is used  
 		   
 		   
 	   }
@@ -116,26 +136,50 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 	   if(isRegistered.equals("No")){
 	   Intent intent=new Intent(this,RegisterWindow.class);
 		intent.putExtra("com.example.webclient.session_variable", index);
+		intent.putExtra("com.example.webclient.isRegistered",isRegistered);
+		
+		intent.putExtra("com.example.webclient.first_name", first_name);
+		intent.putExtra("com.example.webclient.last_name", last_name);
+		intent.putExtra("com.example.webclient.department", department);
+		intent.putExtra("com.example.webclient.faculty", faculty);
+		intent.putExtra("com.example.webclient.semester", semester);
+		intent.putExtra("com.example.webclient.year", year);
+		
+		intent.putExtra("com.example.webclient.email",email);
 		startActivity(intent);
 	   }
 		
 	}
-   public void deregister(){
-	   String URL="http://192.168.42.35/WebServer/Deregister.php?index="+index;
-		deregisterTask.execute(URL); 
+   public void unregister(){
+	   String URL="http://192.168.42.35/WebServer/Unregister.php?index="+index;
+		unregisterTask.execute(URL); 
 		isRegistered="No";
+		b1.setText("Register For News Service ");
+		Button b2 = (Button)findViewById(R.id.checkNews);
+			b2.setVisibility(View.GONE);
    }
    
    public void checkNews(View view){
 		//news window to be implemented
 	   Intent intent=new Intent(this,NewsWindow.class);
 		intent.putExtra("com.example.webclient.session_variable", index);
+		
+		intent.putExtra("com.example.webclient.isRegistered",isRegistered);
+		
+		intent.putExtra("com.example.webclient.first_name", first_name);
+		intent.putExtra("com.example.webclient.last_name", last_name);
+		intent.putExtra("com.example.webclient.department", department);
+		intent.putExtra("com.example.webclient.faculty", faculty);
+		intent.putExtra("com.example.webclient.semester", semester);
+		intent.putExtra("com.example.webclient.year", year);
+		
+		intent.putExtra("com.example.webclient.email",email);
 		startActivity(intent);
 		
 	
 	}
    
-   private class DeregisterTask extends AsyncTask<String,Void,String>{
+   private class UnregisterTask extends AsyncTask<String,Void,String>{
 	   
 		ServerConnection serverConnection=new ServerConnection();
 		public AsyncResponse delegate=null;

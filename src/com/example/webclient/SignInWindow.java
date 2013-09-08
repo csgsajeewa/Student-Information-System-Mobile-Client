@@ -54,8 +54,12 @@ public class SignInWindow extends Activity implements AsyncResponse {
 		intent.putExtra("com.example.webclient.index", user.index_number);
 		intent.putExtra("com.example.webclient.first_name", user.first_name);
 		intent.putExtra("com.example.webclient.last_name", user.last_name);
-		//add other details
-		intent.putExtra("com.example.webclient.isRegistered", user.isRegistered);
+		intent.putExtra("com.example.webclient.department", user.department);
+		intent.putExtra("com.example.webclient.faculty", user.faculty);
+		intent.putExtra("com.example.webclient.semester", user.semester);
+		intent.putExtra("com.example.webclient.year", user.year);
+		
+		intent.putExtra("com.example.webclient.email", user.email);
 		
 		startActivity(intent);
 	}

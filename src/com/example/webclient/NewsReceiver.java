@@ -20,10 +20,10 @@ public class NewsReceiver extends BroadcastReceiver  {
 		NotificationManager notificationManager;
 		notificationManager = (NotificationManager)arg0.getSystemService(svcName);
 		id++;
-		//add pending intent page 411 listing 10-36
+		
 		String title=arg1.getStringExtra("title");
 		String text=arg1.getStringExtra("text");
-		Intent startActivityIntent = new Intent(arg0, NewsWindow.class);
+		Intent startActivityIntent = new Intent(arg0, SignInWindow.class);
 		PendingIntent launchIntent =PendingIntent.getActivity(arg0, 0, startActivityIntent, 0);
 		Notification.Builder builder =new Notification.Builder(arg0);
 				builder.setSmallIcon(R.drawable.logo)
@@ -39,8 +39,7 @@ public class NewsReceiver extends BroadcastReceiver  {
 				.setContentIntent(launchIntent)
 				.setLights(Color.RED, 0, 1);
 				Notification notification = builder.getNotification();
-				//PendingIntent launchIntent=;
-				//notification.setLatestEventInfo(MainActivity.this,"Breaking News!!!","You have to sign MAHAPOLA before 3rd October",launchIntent);
+				
 				
 				//To fire a Notification, pass it in to the notify method of the NotificationManager along with an
 				//integer reference ID

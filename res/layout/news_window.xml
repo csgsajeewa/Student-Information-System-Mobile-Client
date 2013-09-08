@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/newsTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+>
 
+
+    
+    
+
+   <ListView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+   android:id="@+id/newsList"
+    android:layout_weight="1" >
+
+   
+   </ListView>
+
+   <RelativeLayout
+       android:layout_width="fill_parent"
+       android:layout_height="125dp"
+       android:layout_marginTop="5dp"
+       android:background="#ff8D8D8D"
+       android:gravity="center"
+       android:padding="5dp" >
+
+       <Button
+          android:id="@+id/backButton"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentRight="true"
+           android:text="@string/goBack" 
+           android:onClick="goBack"
+           />
+
+       <Button
+          android:text="@string/refresh"
+          android:onClick="onRefresh"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/backButton"
+           android:layout_alignLeft="@+id/backButton"
+           android:layout_alignParentRight="true"
+            />
+
+   </RelativeLayout>
+    
 </LinearLayout>
+
+
+
