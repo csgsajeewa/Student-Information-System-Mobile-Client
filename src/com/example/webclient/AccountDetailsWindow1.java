@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -72,8 +73,10 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 	     }
 	   );
 		//////////////////////////////////////////////////////////////
-		Intent intent = getIntent();
-		isRegistered=intent.getStringExtra("com.example.webclient.isRegistered");
+		String APP_PREFS="user_details";
+		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);
+		
+		isRegistered=details.getString("isRegistered", "");
 		if(isRegistered.equals("Yes")){
 			
 			b1= (Button)findViewById(R.id.Register);
@@ -88,14 +91,14 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 			b2.setVisibility(View.GONE);
 		}
 		
-		 index = intent.getStringExtra("com.example.webclient.index");
-		 first_name= intent.getStringExtra("com.example.webclient.first_name");
-		 last_name = intent.getStringExtra("com.example.webclient.last_name");
-		 department=intent.getStringExtra("com.example.webclient.department");
-		 faculty=intent.getStringExtra("com.example.webclient.faculty");
-		 semester=intent.getStringExtra("com.example.webclient.semester");
-	     year=intent.getStringExtra("com.example.webclient.year");
-		email=intent.getStringExtra("com.example.webclient.email");
+		 index = details.getString("index", "");
+		 first_name=  details.getString("first_name", "");
+		 last_name =  details.getString("last_name", "");
+		 department= details.getString("department", "");
+		 faculty= details.getString("faculty", "");
+		 semester= details.getString("semester", "");
+	     year= details.getString("year", "");
+		email= details.getString("email", "");;
 		TextView textView1=(TextView)findViewById(R.id.profileName1);
 		TextView textView2=(TextView)findViewById(R.id.profileIndex1);
 		TextView textView3=(TextView)findViewById(R.id.profileDepartment1);
@@ -114,11 +117,42 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		
 		
 	}
+	@Override
+	protected void onRestart() {
+		
+		super.onRestart();
+		String APP_PREFS="user_details";
+		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);
+		
+		isRegistered=details.getString("isRegistered", "");
+        if(isRegistered.equals("Yes")){
+			
+			b1= (Button)findViewById(R.id.Register);
+			b1.setText("Unregister From News Service");
+			 b2 = (Button)findViewById(R.id.checkNews);
+		   b2.setVisibility(View.VISIBLE);
+		
+			//b.setVisibility(View.GONE);
+		}
+		
+		if(isRegistered.equals("No")){
+			
+			 b2 = (Button)findViewById(R.id.checkNews);
+			b2.setVisibility(View.GONE);
+		}
+		
+	}
 	
 	public void signOut(View view){
+      ////////////////////shared preferences/////////////
+        String APP_PREFS="app_pref";
+        SharedPreferences mySharedPreferences = getSharedPreferences(APP_PREFS,Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("index", "");
+         editor.apply();//commit changes
+       ///////////////////////////////////////////////////////////////
 		
-		Intent intent=new Intent(this,MainWindow.class);
-		startActivity(intent);
+		finish();
 		
 	
 	}
@@ -135,17 +169,6 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		//register function
 	   if(isRegistered.equals("No")){
 	   Intent intent=new Intent(this,RegisterWindow.class);
-		intent.putExtra("com.example.webclient.session_variable", index);
-		intent.putExtra("com.example.webclient.isRegistered",isRegistered);
-		
-		intent.putExtra("com.example.webclient.first_name", first_name);
-		intent.putExtra("com.example.webclient.last_name", last_name);
-		intent.putExtra("com.example.webclient.department", department);
-		intent.putExtra("com.example.webclient.faculty", faculty);
-		intent.putExtra("com.example.webclient.semester", semester);
-		intent.putExtra("com.example.webclient.year", year);
-		
-		intent.putExtra("com.example.webclient.email",email);
 		startActivity(intent);
 	   }
 		
@@ -162,19 +185,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
    public void checkNews(View view){
 		//news window to be implemented
 	   Intent intent=new Intent(this,NewsWindow.class);
-		intent.putExtra("com.example.webclient.session_variable", index);
-		
-		intent.putExtra("com.example.webclient.isRegistered",isRegistered);
-		
-		intent.putExtra("com.example.webclient.first_name", first_name);
-		intent.putExtra("com.example.webclient.last_name", last_name);
-		intent.putExtra("com.example.webclient.department", department);
-		intent.putExtra("com.example.webclient.faculty", faculty);
-		intent.putExtra("com.example.webclient.semester", semester);
-		intent.putExtra("com.example.webclient.year", year);
-		
-		intent.putExtra("com.example.webclient.email",email);
-		startActivity(intent);
+	   startActivity(intent);
 		
 	
 	}

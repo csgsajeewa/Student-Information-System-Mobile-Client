@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ListView;
@@ -18,28 +19,16 @@ public class NewsWindow extends Activity {
 	Handler handler;
 	NewsAdapter adapter=new NewsAdapter();
 	String index; //use as session variable
-	String isRegistered;
-	String first_name;
-	String last_name;
-	String department;
-	String faculty;
-	String semester;
-	String year;
-	String email;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_window);
-        Intent intent = getIntent();
-		index = intent.getStringExtra("com.example.webclient.session_variable");
-		first_name= intent.getStringExtra("com.example.webclient.first_name");
-		 last_name = intent.getStringExtra("com.example.webclient.last_name");
-		 department=intent.getStringExtra("com.example.webclient.department");
-		 faculty=intent.getStringExtra("com.example.webclient.faculty");
-		 semester=intent.getStringExtra("com.example.webclient.semester");
-	     year=intent.getStringExtra("com.example.webclient.year");
-		email=intent.getStringExtra("com.example.webclient.email");
-		isRegistered="Yes";
+        String APP_PREFS="user_details";
+		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);
+		
+		index=details.getString("index", "");
+		
 		URL="http://192.168.42.35/WebServer/ProvideNews.php?index="+index;
         refreshFromFeed();
         handler=new Handler();
@@ -53,20 +42,7 @@ public class NewsWindow extends Activity {
 	}
 	
 	public void goBack(View view){
-		Intent intent=new Intent(this,AccountDetailsWindow1.class);
-		intent.putExtra("com.example.webclient.index", index);
-		
-		intent.putExtra("com.example.webclient.isRegistered",isRegistered);
-		
-		intent.putExtra("com.example.webclient.first_name", first_name);
-		intent.putExtra("com.example.webclient.last_name", last_name);
-		intent.putExtra("com.example.webclient.department", department);
-		intent.putExtra("com.example.webclient.faculty", faculty);
-		intent.putExtra("com.example.webclient.semester", semester);
-		intent.putExtra("com.example.webclient.year", year);
-		
-		intent.putExtra("com.example.webclient.email",email);
-		startActivity(intent);
+		finish();
 	}
 	
 	

@@ -4,8 +4,10 @@ package com.example.webclient;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 //start window of the application no errors
 
@@ -17,6 +19,9 @@ public class MainWindow extends Activity{
 		 
 		
 	}
+	
+	
+	
 		
 		public void join(View view){
 			
@@ -32,6 +37,7 @@ public class MainWindow extends Activity{
 			startActivity(intent);
 			
 		}
+		
 }
 	
 	

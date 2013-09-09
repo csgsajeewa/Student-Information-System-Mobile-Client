@@ -5,6 +5,7 @@ import java.net.URL;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -14,14 +15,54 @@ import android.widget.Toast;
 
 public class SignInWindow extends Activity implements AsyncResponse {
 	DownloadUserInfoTask downloadUserInfoTask;
+	User user;
+	boolean isBack;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.signin_window);
+		isBack=false;
 		if(downloadUserInfoTask==null){
 		 downloadUserInfoTask=new DownloadUserInfoTask();
 		}
 		downloadUserInfoTask.delegate=this;
 
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		if(!isBack){
+		String APP_PREFS="user_details";
+		 
+         SharedPreferences mySharedPreferences = getSharedPreferences(APP_PREFS,Activity.MODE_PRIVATE);
+         SharedPreferences.Editor editor = mySharedPreferences.edit();
+         editor.putString("isRegistered",user.isRegistered );
+         editor.putString("index",user.index_number );
+         editor.putString("first_name",user.first_name );
+         editor.putString("last_name",user.last_name );
+         editor.putString("department",user.department );
+         editor.putString("faculty",user.faculty );
+         editor.putString("semester",user.semester );
+         editor.putString("year",user.year );
+         editor.putString("email",user.email );
+         editor.apply();
+		}
+		
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	
+	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		isBack=true;
+		finish();
 	}
 	
 	public void sign(View view){
@@ -40,27 +81,17 @@ public class SignInWindow extends Activity implements AsyncResponse {
 	
 	public void goBack(View view){
 		
-		Intent intent=new Intent(this,MainWindow.class);
-		startActivity(intent);
+		//Intent intent=new Intent(this,MainWindow.class);
+		//startActivity(intent);
+		isBack=true;
+		finish();
 	}
 
 	@Override
 	public void processFinish(User user) {
 		
 		Intent intent=new Intent(this,AccountDetailsWindow1.class);
-		
-		
-		intent.putExtra("com.example.webclient.isRegistered",user.isRegistered);
-		intent.putExtra("com.example.webclient.index", user.index_number);
-		intent.putExtra("com.example.webclient.first_name", user.first_name);
-		intent.putExtra("com.example.webclient.last_name", user.last_name);
-		intent.putExtra("com.example.webclient.department", user.department);
-		intent.putExtra("com.example.webclient.faculty", user.faculty);
-		intent.putExtra("com.example.webclient.semester", user.semester);
-		intent.putExtra("com.example.webclient.year", user.year);
-		
-		intent.putExtra("com.example.webclient.email", user.email);
-		
+		this.user=user;
 		startActivity(intent);
 	}
 	

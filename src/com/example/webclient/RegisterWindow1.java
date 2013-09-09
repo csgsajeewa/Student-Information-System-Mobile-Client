@@ -2,7 +2,7 @@ package com.example.webclient;
 
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -27,16 +27,9 @@ public class RegisterWindow1 extends Activity implements AsyncResponse{
 		
 		setContentView(R.layout.register_window_1);
 		registerTask.delegate=this;
-		Intent intent = getIntent();
-		index = intent.getStringExtra("com.example.webclient.session_variable");
-		isRegistered=intent.getStringExtra("com.example.webclient.isRegistered");
-		 first_name= intent.getStringExtra("com.example.webclient.first_name");
-		 last_name = intent.getStringExtra("com.example.webclient.last_name");
-		 department=intent.getStringExtra("com.example.webclient.department");
-		 faculty=intent.getStringExtra("com.example.webclient.faculty");
-		 semester=intent.getStringExtra("com.example.webclient.semester");
-	     year=intent.getStringExtra("com.example.webclient.year");
-		 email=intent.getStringExtra("com.example.webclient.email");
+		String APP_PREFS="user_details";
+		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);
+		index=details.getString("index", "");
 		
 		
 		
@@ -95,19 +88,15 @@ public class RegisterWindow1 extends Activity implements AsyncResponse{
    @Override
   	public void processFinish(String message ) {
   		
-	   Toast.makeText(this, "Registration Suceessful EFAC", Toast.LENGTH_LONG).show();
-	   //Intent intent=new Intent(this,GCMRegister.class);
-	   Intent intent=new Intent(this,AccountDetailsWindow1.class);
-	   intent.putExtra("com.example.webclient.isRegistered","Yes");
-	   intent.putExtra("com.example.webclient.index", index);
-		intent.putExtra("com.example.webclient.first_name", first_name);
-		intent.putExtra("com.example.webclient.last_name", last_name);
-		intent.putExtra("com.example.webclient.department", department);
-		intent.putExtra("com.example.webclient.faculty",faculty);
-		intent.putExtra("com.example.webclient.semester",semester);
-		intent.putExtra("com.example.webclient.year", year);
-  		startActivity(intent);
-  		
+
+	   Toast.makeText(this, "Registration Suceessful", Toast.LENGTH_LONG).show();
+	   String APP_PREFS="user_details";
+	   SharedPreferences mySharedPreferences = getSharedPreferences(APP_PREFS,Activity.MODE_PRIVATE);
+       SharedPreferences.Editor editor = mySharedPreferences.edit();
+       editor.putString("isRegistered","Yes");
+       editor.apply();
+	   finish();
+	  
   		
   	}
    

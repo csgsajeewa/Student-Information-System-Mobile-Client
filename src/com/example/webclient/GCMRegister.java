@@ -32,7 +32,7 @@ public class GCMRegister extends Activity {
     public static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    String SENDER_ID = "670485556512";
+    String SENDER_ID = "670485556512";//project ID - project map view
     static final String TAG = "GCMDemo";
 
     TextView mDisplay;
@@ -113,8 +113,7 @@ public class GCMRegister extends Activity {
    
    //ok
    private SharedPreferences getGCMPreferences(Context context) {
-	    // This sample app persists the registration ID in shared preferences, but
-	    // how you store the regID in your app is up to you.
+	    //  app persists the registration ID in shared preferences
 	    return getSharedPreferences(GCMRegister.class.getSimpleName(),
 	            Context.MODE_PRIVATE);
 	}
@@ -125,7 +124,7 @@ public class GCMRegister extends Activity {
 	                .getPackageInfo(context.getPackageName(), 0);
 	        return packageInfo.versionCode;
 	    } catch (NameNotFoundException e) {
-	        // should never happen
+	       
 	        throw new RuntimeException("Could not get package name: " + e);
 	    }
 	}
@@ -176,9 +175,7 @@ public class GCMRegister extends Activity {
                storeRegistrationId(context, regid);
            } catch (IOException ex) {
                msg = "Error :" + ex.getMessage();
-               // If there is an error, don't just keep trying to register.
-               // Require the user to click a button again, or perform
-               // exponential back-off.
+              
            }
            return msg;
        }

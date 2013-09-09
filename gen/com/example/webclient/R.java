@@ -271,16 +271,14 @@ containing a value of this type.
         public static final int acct_details_window1=0x7f030001;
         public static final int activity_main=0x7f030002;
         public static final int gcm=0x7f030003;
-        public static final int line_point_formatter_with_plf1=0x7f030004;
-        public static final int line_point_formatter_with_plf2=0x7f030005;
-        public static final int main=0x7f030006;
-        public static final int main_window=0x7f030007;
-        public static final int news_window=0x7f030008;
-        public static final int newslist=0x7f030009;
-        public static final int register_window=0x7f03000a;
-        public static final int register_window_1=0x7f03000b;
-        public static final int signin_window=0x7f03000c;
-        public static final int xy_plot=0x7f03000d;
+        public static final int main=0x7f030004;
+        public static final int main_window=0x7f030005;
+        public static final int news_window=0x7f030006;
+        public static final int newslist=0x7f030007;
+        public static final int register_window=0x7f030008;
+        public static final int register_window_1=0x7f030009;
+        public static final int signin_window=0x7f03000a;
+        public static final int xy_plot=0x7f03000b;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
