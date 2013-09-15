@@ -1,13 +1,14 @@
+//display customer details- in the profile window
+
 package com.example.webclient;
-
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -15,29 +16,32 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//display customer details
+
 public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
    
-	
-	String index; //use as session variable
-	String isRegistered;
-	String first_name;
-	String last_name;
-	String department;
-	String faculty;
-	String semester;
-	String year;
-	String email;
-	AlertDialog.Builder ad;
-	UnregisterTask unregisterTask=new UnregisterTask();
-	Button b1 ;
-	Button b2;
+	////////////user details to display in window///////////////////
+	private String index; //use as session variable -if it is not set consider as user logout from the application
+	private String isRegistered;
+	private String first_name;
+	private String last_name;
+	private String department;
+	private String faculty;
+	private String semester;
+	private String year;
+	private String email;
+	private String serverMessage;
+	///////////////////////////////////////////////////////////////////
+	private AlertDialog.Builder ad;
+	private UnregisterTask unregisterTask; // network activities cannot be done in main thread so that it has done in ASYNCTASK
+	private Button b1 ;
+	private Button b2;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.acct_details_window1);
-		////////////////////////Dialog unregister///////////////////////////////////
+		////////////////////////Dialog unregister-display when user needs to unregister///////////////////////////////////
+		unregisterTask=new UnregisterTask();
 		unregisterTask.delegate=this;
 		Context context = AccountDetailsWindow1.this;
 		String title = "UOM Info System";
@@ -51,7 +55,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		
 		ad.setPositiveButton(button1String,new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int arg1) {
-				unregister();// this function to be implemented 
+				unregister();
 			}
 		}
 	   );
@@ -68,21 +72,23 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		ad.setCancelable(true);
 		ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
 	            public void onCancel(DialogInterface dialog) {
-	                     // eatenByGrue(); this function is not required
+	                     
 	        }
 	     }
 	   );
 		//////////////////////////////////////////////////////////////
 		String APP_PREFS="user_details";
-		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);
+		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);// access data set by sign in window
 		
 		isRegistered=details.getString("isRegistered", "");
+		//text of the button b1 is changed according to user details.
+		//Ex- isRegistered=false ->b1 text=Register and check news button is visible
 		if(isRegistered.equals("Yes")){
 			
 			b1= (Button)findViewById(R.id.Register);
 			b1.setText("Unregister From News Service");
 		
-			//b.setVisibility(View.GONE);
+			
 		}
 		
 		if(isRegistered.equals("No")){
@@ -90,7 +96,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 			 b2 = (Button)findViewById(R.id.checkNews);
 			b2.setVisibility(View.GONE);
 		}
-		
+		//get data from shared preferences
 		 index = details.getString("index", "");
 		 first_name=  details.getString("first_name", "");
 		 last_name =  details.getString("last_name", "");
@@ -98,7 +104,8 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		 faculty= details.getString("faculty", "");
 		 semester= details.getString("semester", "");
 	     year= details.getString("year", "");
-		email= details.getString("email", "");;
+		 email= details.getString("email", "");
+		 //get reference to the UI elements
 		TextView textView1=(TextView)findViewById(R.id.profileName1);
 		TextView textView2=(TextView)findViewById(R.id.profileIndex1);
 		TextView textView3=(TextView)findViewById(R.id.profileDepartment1);
@@ -107,6 +114,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 		TextView textView6=(TextView)findViewById(R.id.profileStudyYear1);
 		TextView textView7=(TextView)findViewById(R.id.profileEmail1);
 		String name= first_name+" "+last_name;
+		//set values to UI elements
 		textView1.setText(name);
 		textView2.setText(index);
 		textView3.setText(department);
@@ -119,7 +127,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 	}
 	@Override
 	protected void onRestart() {
-		
+		//restore the state on restart
 		super.onRestart();
 		String APP_PREFS="user_details";
 		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);
@@ -129,23 +137,24 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 			
 			b1= (Button)findViewById(R.id.Register);
 			b1.setText("Unregister From News Service");
-			 b2 = (Button)findViewById(R.id.checkNews);
-		   b2.setVisibility(View.VISIBLE);
+			b2 = (Button)findViewById(R.id.checkNews);
+		    b2.setVisibility(View.VISIBLE);
 		
-			//b.setVisibility(View.GONE);
+			
 		}
 		
 		if(isRegistered.equals("No")){
 			
-			 b2 = (Button)findViewById(R.id.checkNews);
+			b2 = (Button)findViewById(R.id.checkNews);
 			b2.setVisibility(View.GONE);
 		}
 		
 	}
-	
-	public void signOut(View view){
+	//set index=""
+	public void signOut(View view)
+	{
       ////////////////////shared preferences/////////////
-        String APP_PREFS="app_pref";
+        String APP_PREFS="user_details";
         SharedPreferences mySharedPreferences = getSharedPreferences(APP_PREFS,Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
         editor.putString("index", "");
@@ -157,7 +166,7 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 	
 	}
 	// if user is not registered for the news service this function will register the user. 
-	//if he has already registered then check news
+	//if he has already registered then unregister
    public void register(View view){
 	   //unregister function-show dialog
 	   if(isRegistered.equals("Yes")){
@@ -173,34 +182,49 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
 	   }
 		
 	}
+   //unregister function
    public void unregister(){
 	   String URL="http://192.168.42.35/WebServer/Unregister.php?index="+index;
+	   if(unregisterTask==null){
+		   unregisterTask=new UnregisterTask();
+		   unregisterTask.delegate=this;
+	   }
+	   //check the network status
+	   if(isNetworkAvailable()){
 		unregisterTask.execute(URL); 
-		isRegistered="No";
-		b1.setText("Register For News Service ");
-		Button b2 = (Button)findViewById(R.id.checkNews);
-			b2.setVisibility(View.GONE);
+		
+		
+	   }
+	   
+	   
+	   else{
+		   Toast toast = Toast.makeText(this, "No Network Connection!", Toast.LENGTH_LONG);
+			toast.show(); 
+	   }
+		
+		
    }
-   
+   //use to display news
    public void checkNews(View view){
-		//news window to be implemented
+		
 	   Intent intent=new Intent(this,NewsWindow.class);
 	   startActivity(intent);
 		
 	
 	}
-   
+  //AsynTask-class allows to perform background operations and publish results on the UI thread without having to manipulate threads and/or handlers. 
    private class UnregisterTask extends AsyncTask<String,Void,String>{
 	   
-		ServerConnection serverConnection=new ServerConnection();
+		ServerConnection serverConnection=new ServerConnection();//get server connection
 		public AsyncResponse delegate=null;
 		
 		@Override
 		protected String doInBackground(String... params) {
 			
-			 String result= serverConnection.connectToServer(params[0]);
+			 String result= serverConnection.connectToServer(params[0]);//get server result
+			 serverMessage=result;
 			 return result;
-	             
+			  
 	     }
 
 		
@@ -208,22 +232,54 @@ public class AccountDetailsWindow1 extends Activity  implements AsyncResponse{
        protected void onPostExecute(String result) {
 			
 			 delegate.processFinish(result);
+			 unregisterTask=null;///////////////other wise when we unregister multiple times system gives an error- asyncTask has already started
+			
       }
+		
 		
 	}
 
-@Override
+@Override // from AsyncRespons interface
 public void processFinish(User user) {
-	// TODO Auto-generated method stub
+	//not used
 	
 }
 
-@Override
+@Override // from AsyncRespons interface
 public void processFinish(String message) {
-	Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
-	toast.show();
+	//handling server connection errors
+	if(message.equals("Error")){
+		serverMessage="Error";
+		Toast toast = Toast.makeText(this, "Server Error, Try Lator", Toast.LENGTH_LONG);
+		toast.show();
+	}
+	else{
+	   Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+	
+		isRegistered="No";
+		SharedPreferences mySharedPreferences = getSharedPreferences("user_details",Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("isRegistered",isRegistered );
+        editor.apply();
+		b1.setText("Register For News Service ");
+		Button b2 = (Button)findViewById(R.id.checkNews);
+		b2.setVisibility(View.GONE);
+		toast.show();
+	}
 	
 }
+//check network connection
+public boolean isNetworkAvailable() {
+    ConnectivityManager cm = (ConnectivityManager) 
+      getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+    // if no network is available networkInfo will be null
+    // otherwise check if we are connected
+    if (networkInfo != null && networkInfo.isConnected()) {
+        return true;
+    }
+    return false;
+} 
 
    
   

@@ -1,6 +1,8 @@
 package com.example.webclient;
 
-
+/*
+ * get new items list , send it to the list view
+ */
 import java.util.ArrayList;
 
 import android.view.LayoutInflater;

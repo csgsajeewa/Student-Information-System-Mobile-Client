@@ -192,9 +192,8 @@ containing a value of this type.
     public static final class id {
         public static final int BackToSign=0x7f060005;
         public static final int Register=0x7f06000a;
-        public static final int action_settings=0x7f06004a;
+        public static final int action_settings=0x7f06004b;
         public static final int backButton=0x7f060035;
-        public static final int button1=0x7f06001d;
         public static final int button2=0x7f060033;
         public static final int button3=0x7f060032;
         public static final int checkNews=0x7f06000c;
@@ -220,13 +219,14 @@ containing a value of this type.
         public static final int facRadio3=0x7f06003d;
         public static final int facRadioGroup1=0x7f06003a;
         public static final int gcmMessage=0x7f060030;
+        public static final int goBack=0x7f060049;
         public static final int heading1=0x7f060007;
         public static final int heading2=0x7f06000d;
         public static final int heading3=0x7f060039;
         public static final int heading4=0x7f06003e;
         public static final int hybrid=0x7f060004;
         public static final int message=0x7f060031;
-        public static final int mySimpleXYPlot=0x7f060049;
+        public static final int mySimpleXYPlot=0x7f06004a;
         public static final int newsList=0x7f060034;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
@@ -252,6 +252,7 @@ containing a value of this type.
         public static final int subheading1=0x7f060006;
         public static final int subheading2=0x7f060009;
         public static final int subheading3=0x7f060008;
+        public static final int submit=0x7f06001d;
         public static final int terrain=0x7f060003;
         public static final int textView1=0x7f06001c;
         public static final int textView10=0x7f060026;

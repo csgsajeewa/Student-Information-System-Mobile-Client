@@ -61,9 +61,8 @@ int drawable ic_launcher 0x7f020018
 int drawable logo 0x7f020019
 int id BackToSign 0x7f060005
 int id Register 0x7f06000a
-int id action_settings 0x7f06004a
+int id action_settings 0x7f06004b
 int id backButton 0x7f060035
-int id button1 0x7f06001d
 int id button2 0x7f060033
 int id button3 0x7f060032
 int id checkNews 0x7f06000c
@@ -89,13 +88,14 @@ int id facRadio2 0x7f06003c
 int id facRadio3 0x7f06003d
 int id facRadioGroup1 0x7f06003a
 int id gcmMessage 0x7f060030
+int id goBack 0x7f060049
 int id heading1 0x7f060007
 int id heading2 0x7f06000d
 int id heading3 0x7f060039
 int id heading4 0x7f06003e
 int id hybrid 0x7f060004
 int id message 0x7f060031
-int id mySimpleXYPlot 0x7f060049
+int id mySimpleXYPlot 0x7f06004a
 int id newsList 0x7f060034
 int id none 0x7f060000
 int id normal 0x7f060001
@@ -121,6 +121,7 @@ int id signOut 0x7f06000b
 int id subheading1 0x7f060006
 int id subheading2 0x7f060009
 int id subheading3 0x7f060008
+int id submit 0x7f06001d
 int id terrain 0x7f060003
 int id textView1 0x7f06001c
 int id textView10 0x7f060026

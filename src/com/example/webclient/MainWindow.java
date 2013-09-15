@@ -1,15 +1,12 @@
+//start window of the application 
 package com.example.webclient;
-
-
-
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-//start window of the application no errors
+
+
 
 public class MainWindow extends Activity{
 	
@@ -20,9 +17,13 @@ public class MainWindow extends Activity{
 		
 	}
 	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
 	
-	
-		
+		//join button pressed - start MainActivity
 		public void join(View view){
 			
 			Intent intent = new Intent(this, MainActivity.class);
@@ -30,7 +31,7 @@ public class MainWindow extends Activity{
 			
 		}
 		
-		
+		//sign in button pressed- start SignInWindow
 		public void signIn(View view){
 			
 			Intent intent = new Intent(this, SignInWindow.class);

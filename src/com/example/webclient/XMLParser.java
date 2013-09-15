@@ -17,7 +17,7 @@ import android.util.Log;
 
 /*server transfer data(account details etc) to mobile app as a xml document 
  * this class will accept that and parse that and extract the details
- * 
+ * store it in a User object and return
  */
 	public class XMLParser extends DefaultHandler{
 		
@@ -176,13 +176,11 @@ import android.util.Log;
 	            SAXParserFactory spf = SAXParserFactory.newInstance();
 	            SAXParser sp = spf.newSAXParser();
 	            XMLReader xr = sp.getXMLReader();
-	           // File file = new File("WebClient\\src\\com\\example\\webclient\\rss.xml");
-				//FileInputStream fis = new FileInputStream(file);
+	            //register this class to handle events based on XML document items
 	            xr.setContentHandler(this);
-	            user.index_number="ddsdsd";
-	           URL url1= new URL("http://192.168.42.35:8080/WebServer/AccountDetails.php?index=100470N");
 	           
-	           xr.parse(new InputSource(url.openStream()));
+	            //start parsing
+	            xr.parse(new InputSource(url.openStream()));
 	         
 	         
 	        } catch (IOException e) {
@@ -193,10 +191,8 @@ import android.util.Log;
 	            Log.e("", e.toString());
 	        }
 		}
-
+      //return user details
 	  public User getUserInfo(){
-		  
-		  
 		  return user;
 	  }
 		

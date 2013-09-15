@@ -1,6 +1,8 @@
+/*
+ * this is used to display news registration details to user
+ * EFAC student need to go to "RegisterWindow1" to select dept"
+ */
 package com.example.webclient;
-
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,21 +10,22 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-
-import android.widget.Toast;
 import android.widget.RadioButton;
 
 public class RegisterWindow extends Activity implements AsyncResponse{
    
-	RegisterTask registerTask=new RegisterTask();
-	String index; //use as session variable
+   private RegisterTask registerTask;
+   private String index; //use as session variable
+   private String serverMessage;//for testing purposes
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.register_window);
+		registerTask=new RegisterTask();
 		registerTask.delegate=this;
 		String APP_PREFS="user_details";
+		// retrieve index value from shared preferences 
 		SharedPreferences details = getSharedPreferences(APP_PREFS, 0);
 		
 		index=details.getString("index", "");
@@ -39,6 +42,12 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		finish();
 	}
 	
+	@Override
+	protected void onPause() {
+	
+		super.onPause();
+	}
+	// user clicks EFAC button
 	public void selectDept(View view){
 		
 		Intent intent=new Intent(this,RegisterWindow1.class);
@@ -46,7 +55,7 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		
 	
 	}
-	
+	//user clicks the Archi/IT button
    public void register(View view){
 	   boolean checked = ((RadioButton) view).isChecked();
 		
@@ -73,17 +82,13 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 	public void processFinish(User user) {
 		
    }
-   
+   //start the GCM class to register device in the GCM in server
    @Override
   	public void processFinish(String message ) {
   		
-	   Toast.makeText(this, "Registration Suceessful", Toast.LENGTH_LONG).show();
-	   String APP_PREFS="user_details";
-	   SharedPreferences mySharedPreferences = getSharedPreferences(APP_PREFS,Activity.MODE_PRIVATE);
-       SharedPreferences.Editor editor = mySharedPreferences.edit();
-       editor.putString("isRegistered","Yes");
-       editor.apply();
-	   finish();
+	 
+	   Intent intent =new Intent(this,GCMRegister.class);
+		 startActivity(intent);
   		
   	}
    
@@ -95,6 +100,7 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		@Override
 		protected String doInBackground(String... params) {
 			 String result= serverConnection.connectToServer(params[0]);
+			 serverMessage=result;
 	         return result;
 	              
 	              
@@ -108,6 +114,11 @@ public class RegisterWindow extends Activity implements AsyncResponse{
       }
 		
 	}
+   
+   //for testing
+   public String getServerMessage() {
+	return serverMessage;
+   }
   	
 	
 }

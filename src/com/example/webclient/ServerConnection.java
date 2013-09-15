@@ -1,3 +1,6 @@
+/*
+ * used to connect to the application server
+ */
 package com.example.webclient;
 
 import java.io.BufferedReader;
@@ -11,7 +14,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-//used to connect to the server
+
 
 public class ServerConnection {
 
@@ -24,10 +27,10 @@ public class ServerConnection {
 	    	
 	    	try {
 	    		 HttpClient httpclient = new DefaultHttpClient();
-	    		
+	    		//connect to the server and get response
 	    		 HttpGet httpget = new HttpGet(URL);
 			     HttpResponse response = httpclient.execute(httpget);
-			     
+			     //connect successfully
 			    if(response != null) {
 			       
 			        InputStream inputstream = response.getEntity().getContent();
@@ -35,41 +38,28 @@ public class ServerConnection {
 			      
 			    } 
 			    else {
-			       // Toast.makeText(this, "Unable to complete your request", Toast.LENGTH_LONG).show();
-			    	line="Unable to complete your request";
+			      
+			    	line="Error"; //used by application to identify the server error
 			    }
 			} catch (ClientProtocolException e) {
-				line="pro";
-			    //Toast.makeText(this, "Caught ClientProtocolException", Toast.LENGTH_LONG).show();
+				line="Error"; //used by application to identify the server error
+			    
 			} catch (IOException e) {
-				line= "IO";
-			   // Toast.makeText(this, "Caught IOException", Toast.LENGTH_LONG).show();
+				line= "Error"; //used by application to identify the server error
+			 
 			} catch (Exception e) {
-				line="Exception";
-			  //  Toast.makeText(this, "Caught Exception", Toast.LENGTH_LONG).show();
+				line="Error"; //used by application to identify the server error
+			  
 			}
-	    	//textView.setText(line);
 	    	
-	    	return line;
+	    	
+	    	return line; // return response
 			
 	
 	
 }
 
-public String convertEmail(String email){
-	
-	int ascii_value;
-	for(int i=0;i<email.length();i++){
-		ascii_value=email.charAt(i);
-		if(ascii_value==64){
-			
-			
-		}
-	}
-	
-	return email;
-	
-}
+
 private String convertStreamToString(InputStream is) {
    String line = "";
    StringBuilder total = new StringBuilder();

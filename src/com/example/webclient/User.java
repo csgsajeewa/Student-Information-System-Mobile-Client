@@ -1,16 +1,19 @@
+/*
+ * use to store data about users
+ */
 package com.example.webclient;
 
 public class User {
 	
-	String index_number;
-	String first_name;
-	String last_name;
-	String department;
-	String faculty;
-	String year;
-	String semester;
-	String email;
-	String isRegistered;
+	private String index_number;
+	private String first_name;
+	private String last_name;
+	private String department;
+	private String faculty;
+	private String year;
+	private String semester;
+	private String email;
+	private String isRegistered;
 
 	
 	public void setFirst_name(String first_name) {
