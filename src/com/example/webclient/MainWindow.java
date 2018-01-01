@@ -16,6 +16,7 @@ public class MainWindow extends Activity{
 		 
 		
 	}gi
+	asfasdfasdf
 	
 	@Override
 	protected void onPause() {
