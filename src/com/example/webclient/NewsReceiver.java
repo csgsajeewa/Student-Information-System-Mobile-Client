@@ -14,7 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 
-
+develop change 1
 public class NewsReceiver extends BroadcastReceiver  {
     static int id=0;// to generate multiple notifications
 	@Override
