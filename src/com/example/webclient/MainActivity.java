@@ -1,4 +1,4 @@
-
+sdfsdfsd
 //this activity is used to register users in the site
 //link with activity_main.xml
 
