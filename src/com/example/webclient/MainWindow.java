@@ -21,7 +21,7 @@ public class MainWindow extends Activity{
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-	}
+	}sdaf
 	
 		//join button pressed - start MainActivity
 		public void join(View view){
