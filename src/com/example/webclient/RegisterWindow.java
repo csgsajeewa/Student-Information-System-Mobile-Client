@@ -76,7 +76,7 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		 registerTask.execute(URL);
 		 hello code
 		 how are you
-		
+		hello hello
 	
 	}
    

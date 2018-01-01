@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+ branch chane
 public class NewsAdapter extends BaseAdapter{
 	
 	private ArrayList<NewsItem>list;
