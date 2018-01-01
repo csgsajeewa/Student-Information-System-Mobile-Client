@@ -12,7 +12,7 @@ public class NewsItem {
 		return description;
 	}
 	
-	
+	hello
 	
 	public String getPubDate() {
 		return pubDate;

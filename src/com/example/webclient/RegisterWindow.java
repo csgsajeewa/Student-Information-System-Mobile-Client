@@ -74,6 +74,8 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 	   }
 	   String URL="http://192.168.42.35/WebServer/Register.PHP?index="+index+"&fac_code="+fac_code+"&dept_code="+dept_code;
 		 registerTask.execute(URL);
+		 hello code
+		 how are you
 		
 	
 	}
