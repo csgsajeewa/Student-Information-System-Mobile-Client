@@ -77,6 +77,9 @@ public class RegisterWindow extends Activity implements AsyncResponse{
 		 hello code
 		 how are you
 		hello hello
+
+		sdfasdf
+		asdfasdf
 	
 	}
    
