@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 
-
+develop remote changes
 
 public class MainWindow extends Activity{
 	
@@ -15,7 +15,7 @@ public class MainWindow extends Activity{
 		setContentView(R.layout.main_window);
 		 
 		
-	}
+	}gi
 	
 	@Override
 	protected void onPause() {
