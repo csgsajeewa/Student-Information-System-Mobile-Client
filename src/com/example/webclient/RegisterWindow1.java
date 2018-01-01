@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import android.widget.Toast;
-
+sfasdfasdfs
 public class RegisterWindow1 extends Activity implements AsyncResponse{
    
 	private RegisterTask registerTask;
