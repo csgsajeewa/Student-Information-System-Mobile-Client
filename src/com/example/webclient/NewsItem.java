@@ -16,7 +16,7 @@ public class NewsItem {
 	
 	public String getPubDate() {
 		return pubDate;
-	}
+	}sadfasdfasdfasdf
 	
 	public String getTitle() {
 		return title;
